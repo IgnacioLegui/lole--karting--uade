@@ -1,6 +1,6 @@
 # ==============================================================
-#   INTRODUCCION A LA ALGORITMIA
-#   TRABAJO PRACTICO OBLIGATORIO  -  PARTE 2
+#   FUNDAMENTOS DE PROGRAMACION - 563075
+#   TRABAJO PRACTICO GRUPAL Y OBLIGATORIO  -  PARTE 2
 #   Docente: Lic. Christian G. SCHENDEL
 #
 #   Nro. de Grupo: 6
@@ -14,7 +14,7 @@
 #   LOLE KARTING  -  Sistema de Ventas
 # ==============================================================
 
-import random 
+import random   # Modulo random (visto en clase) para el nro de factura
 
 # ==============================================================
 #   DATOS DEL NEGOCIO (guardados en una lista)
@@ -122,16 +122,11 @@ def calcular_subtotales(cantidades):
 # ==============================================================
 
 # Genera un nro de factura aleatorio que no este ya en la lista de usados.
+# Usa busqueda_lineal para verificar si el numero ya fue utilizado.
 def generar_factura(facturas_usadas):
     nro = random.randint(1000, 9999)
-    repetido = True
-    while repetido == True:
-        repetido = False
-        for i in range(len(facturas_usadas)):
-            if facturas_usadas[i] == nro:
-                repetido = True
-        if repetido == True:
-            nro = random.randint(1000, 9999)
+    while busqueda_lineal(facturas_usadas, nro) != -1:
+        nro = random.randint(1000, 9999)
     return nro
 
 # ==============================================================
@@ -423,16 +418,17 @@ def mostrar_estadisticas(matriz):
     print(separador)
 
 # ==============================================================
-#   BUSQUEDA LINEAL
+#   BUSQUEDA LINEAL (Clase 13)
 # ==============================================================
 
 # Recorre una lista posicion por posicion buscando el dato.
 # Si algun elemento coincide, devuelve su posicion.
 # Si no lo encuentra, devuelve -1.
+# Funciona con cualquier tipo de dato (strings, enteros, etc.).
 def busqueda_lineal(lista, dato):
     posicion = -1
     for i in range(len(lista)):
-        if lista[i].lower() == dato:
+        if lista[i] == dato:
             posicion = i
     return posicion
 
@@ -441,18 +437,20 @@ def busqueda_lineal(lista, dato):
 # ==============================================================
 
 # Pide un dato por teclado y busca una venta por nombre, apellido o DNI.
-# Arma listas separadas y aplica busqueda_lineal sobre cada una.
+# Arma listas separadas en minusculas y aplica busqueda_lineal sobre cada una.
 # Repite hasta que el dato coincida con alguna venta.
 def buscar_venta(matriz, dnis):
     print("  BUSCADOR DE VENTAS")
     print("  Ingrese un nombre, apellido o DNI para buscar una venta.")
 
-    # Armamos listas separadas de nombres y apellidos para aplicar busqueda lineal
+    # Armamos listas en minusculas para que la busqueda no distinga mayusculas
     nombres   = []
     apellidos = []
+    dnis_lower = []
     for i in range(len(matriz)):
-        nombres.append(matriz[i][1])
-        apellidos.append(matriz[i][2])
+        nombres.append(matriz[i][1].lower())
+        apellidos.append(matriz[i][2].lower())
+        dnis_lower.append(dnis[i].lower())
 
     encontrado = False
     while encontrado == False:
@@ -463,9 +461,9 @@ def buscar_venta(matriz, dnis):
         if pos == -1:
             pos = busqueda_lineal(apellidos, dato)
         if pos == -1:
-            pos = busqueda_lineal(dnis, dato)
+            pos = busqueda_lineal(dnis_lower, dato)
 
-        # Si busqueda_lineal devolvio -1 en las tres, no se encontro
+        # Si busqueda_lineal devolvio -1 en las tres listas, no se encontro
         if pos == -1:
             print("  No encontrado. Intente de nuevo.")
         else:
