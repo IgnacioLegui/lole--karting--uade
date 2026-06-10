@@ -16,23 +16,6 @@
 
 import random
 
-datos_negocio = [
-    "LOLE KARTING",
-    "30-71234567-9",
-    "Av. Cnel. Roca 3850, Lugano, CABA",
-    "+54 11 4605-7890",
-    "@lolekarting",
-    "Lun-Vie 14:00-22:00  /  Sab-Dom 10:00-22:00"
-]
-
-nombres_servicios = ["Simulador de manejo", "Pista de karting", "Curso de manejo", "Paquete de cumpleaños"]
-precios_servicios = [3500, 6000, 15000, 80000]
-detalle_servicios = ["15 min", "10 min / 10 vueltas", "1 hora", "8 hs (pista + simuladores)"]
-
-separador = "============================================================"
-linea     = "------------------------------------------------------------"
-
-
 def pedir_texto(mensaje):
     texto = input(mensaje).title()
     while len(texto) < 2:
@@ -404,6 +387,21 @@ def procesar_todas_las_ventas(cantidad_ventas):
 
     return [matriz_ventas, dnis_ventas]
 
+datos_negocio = [
+    "LOLE KARTING",
+    "30-71234567-9",
+    "Av. Cnel. Roca 3850, Lugano, CABA",
+    "+54 11 4605-7890",
+    "@lolekarting",
+    "Lun-Vie 14:00-22:00  /  Sab-Dom 10:00-22:00"
+]
+
+nombres_servicios = ["Simulador de manejo", "Pista de karting", "Curso de manejo", "Paquete de cumpleaños"]
+precios_servicios = [3500, 6000, 15000, 80000]
+detalle_servicios = ["15 min", "10 min / 10 vueltas", "1 hora", "8 hs (pista + simuladores)"]
+
+separador = "============================================================"
+linea     = "------------------------------------------------------------"
 
 CANTIDAD_VENTAS = 3
 
